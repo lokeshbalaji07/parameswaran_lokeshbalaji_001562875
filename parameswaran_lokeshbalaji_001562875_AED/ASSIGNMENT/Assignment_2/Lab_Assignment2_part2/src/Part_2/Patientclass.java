@@ -6,6 +6,7 @@
 package Part_2;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -13,7 +14,7 @@ import java.util.Scanner;
  *
  * @author Lokesh Balaji
  */
-public class patientclass {
+public class Patientclass {
     
     private static ArrayList<Vitalsigns> list = new ArrayList();
      static int Respiratoryrate,Heartrate,Bloodpressure;
@@ -29,6 +30,7 @@ public class patientclass {
     public static void createmenu(){
         //ArrayList<Vitalsigns> list = new ArrayList();
         String name=null;
+        Date date;
         int Respiratoryrate,Heartrate,Bloodpressure,age=0;
         float weightk,weightp;
         //Patient patientn = new Patient("name",25);
@@ -127,7 +129,9 @@ public class patientclass {
         weightk = sc.nextFloat();
         System.out.println("Enter Weight in Pounds");
         weightp = sc.nextFloat();
-        Vitalsigns vitalsign = new Vitalsigns(Respiratoryrate,Heartrate,Bloodpressure,weightk,weightp);
+        date= new Date();
+        
+        Vitalsigns vitalsign = new Vitalsigns(Respiratoryrate,Heartrate,Bloodpressure,weightk,weightp,date);
         list.add(vitalsign);
         //list.get(0).getHeartrate();
         //System.out.println(list.get(0).getHeartrate());
@@ -178,21 +182,25 @@ public class patientclass {
     }
     public static void viewmenu()
     {
-        System.out.print("S.No"+"   ");
-        System.out.print("Respiratoryrate"+"   ");
-        System.out.println("Heartrate"+"   "+"Bloodpressure"+"   "+"weight(k)"+"   "+"weight(p)");
+        System.out.println("===========================================================================================================");
+        System.out.print("S.No"+" | ");
+        System.out.print("Respiratoryrate"+" | ");
+        System.out.println("Heartrate"+" | "+"Bloodpressure"+" | "+"weight(k)"+" | "+"weight(p)"+" |          "+"CreatedTime");
+        System.out.println("===========================================================================================================");
         for(int i=0;i<list.size();i++)
             
         {
         
         System.out.print(i+1);
         //System.out.println("   ");
-        System.out.print("          "+list.get(i).getRespiratoryrate()+"              ");
-        System.out.print(list.get(i).getHeartrate()+"           ");
-        System.out.print(list.get(i).getBloodpressure()+"            ");
+        System.out.print("             "+list.get(i).getRespiratoryrate()+"              ");
+        System.out.print(list.get(i).getHeartrate()+"            ");
+        System.out.print(list.get(i).getBloodpressure()+"             ");
         System.out.print(list.get(i).getWeightk()+"         ");
-        System.out.println(list.get(i).getWeightp());
+        System.out.print(list.get(i).getWeightp()+"       ");
+        System.out.println(list.get(i).getCreatedtime());
         }
+        System.out.println("===========================================================================================================");
         display();
     }
     public static void checkmenu()

@@ -5,6 +5,8 @@
  */
 package Part_2;
 
+import java.util.Date;
+
 /**
  *
  * @author Lokesh Balaji
@@ -16,13 +18,23 @@ public class Vitalsigns {
     private int Bloodpressure;
     private float weightk;
     private float weightp;
+    private Date Createdtime;
 
-    public Vitalsigns(int Respiratoryrate, int Heartrate, int Bloodpressure, float weightk, float weightp) {
+    public Date getCreatedtime() {
+        return Createdtime;
+    }
+
+    public void setCreatedtime(Date Createdtime) {
+        this.Createdtime = Createdtime;
+    }
+
+    public Vitalsigns(int Respiratoryrate, int Heartrate, int Bloodpressure, float weightk, float weightp, Date Createdtime) {
         this.Respiratoryrate = Respiratoryrate;
         this.Heartrate = Heartrate;
         this.Bloodpressure = Bloodpressure;
         this.weightk = weightk;
         this.weightp = weightp;
+        this.Createdtime = Createdtime;
     }
 
     Vitalsigns() {
