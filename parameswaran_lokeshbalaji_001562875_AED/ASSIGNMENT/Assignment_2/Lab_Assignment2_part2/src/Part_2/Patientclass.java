@@ -20,7 +20,9 @@ public class Patientclass {
      static int Respiratoryrate,Heartrate,Bloodpressure;
      static float weightk,weightp;
      static String type=null;
-            
+     static boolean flag=false; 
+     static String name=null;
+     
     
     public static void main (String args[])
     {
@@ -29,13 +31,14 @@ public class Patientclass {
         //Vitalsigns vitalsign = new Vitalsigns();
     public static void createmenu(){
         //ArrayList<Vitalsigns> list = new ArrayList();
-        String name=null;
+        //String name=null;
         Date date;
         int Respiratoryrate,Heartrate,Bloodpressure,age=0;
         float weightk,weightp;
         //Patient patientn = new Patient("name",25);
         //Vitalsigns vitalsign = new Vitalsigns(Respiratoryrate,Heartrate,Bloodpressure,weightk,weightp);
         Scanner sc = new Scanner(System.in);
+        if(!flag){
         System.out.print("Enter a name: ");
         name=sc.nextLine();
         System.out.println("Enter the age in Years,months,days");
@@ -48,6 +51,8 @@ public class Patientclass {
         int months = sc.nextInt();
         System.out.print("Days:");
         int days = sc.nextInt();
+        flag=true;
+        
         
         
         //String type=null;
@@ -118,6 +123,7 @@ public class Patientclass {
         else{
             System.out.println("Enter proper values");
         }
+        }
        
         System.out.println("Enter Respiratory rate");
         Respiratoryrate = sc.nextInt();
@@ -182,25 +188,27 @@ public class Patientclass {
     }
     public static void viewmenu()
     {
-        System.out.println("===========================================================================================================");
+        System.out.println("==================================================================================================================");
         System.out.print("S.No"+" | ");
+        System.out.print("Name"+" | ");
         System.out.print("Respiratoryrate"+" | ");
-        System.out.println("Heartrate"+" | "+"Bloodpressure"+" | "+"weight(k)"+" | "+"weight(p)"+" |          "+"CreatedTime");
-        System.out.println("===========================================================================================================");
+        System.out.println("Heartrate"+" | "+"Bloodpressure"+" | "+"Weight(k)"+" | "+"Weight(p)"+" |          "+"CreatedTime");
+        System.out.println("==================================================================================================================");
         for(int i=0;i<list.size();i++)
             
         {
         
         System.out.print(i+1);
+        System.out.print("     "+name);
         //System.out.println("   ");
-        System.out.print("             "+list.get(i).getRespiratoryrate()+"              ");
-        System.out.print(list.get(i).getHeartrate()+"            ");
-        System.out.print(list.get(i).getBloodpressure()+"             ");
+        System.out.print("         "+list.get(i).getRespiratoryrate()+"             ");
+        System.out.print(list.get(i).getHeartrate()+"           ");
+        System.out.print(list.get(i).getBloodpressure()+"            ");
         System.out.print(list.get(i).getWeightk()+"         ");
         System.out.print(list.get(i).getWeightp()+"       ");
         System.out.println(list.get(i).getCreatedtime());
         }
-        System.out.println("===========================================================================================================");
+        System.out.println("==================================================================================================================");
         display();
     }
     public static void checkmenu()
