@@ -6,9 +6,17 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Organization;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,8 +36,30 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.system = system;
         this.delorganizat = delorganizat;
+        populatetable();
+        
     }
-
+ 
+     public void populatetable(){
+        
+        DefaultTableModel tablemodel1 = (DefaultTableModel) tablemandel.getModel();
+        tablemodel1.setRowCount(0);
+        if(system.getDeliveryManDirectory().searchOrganization("Delivery") ==null){
+            return;
+        }
+     List<Organization> organizationdel =system.getDeliveryManDirectory().searchOrganization("Delivery") ;
+     for(Organization o : organizationdel)
+     {
+        for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
+            Object row[] = new Object[3];
+            row[0] = ua.getEmployee().getName();
+            row[1] = ua;
+            tablemodel1.addRow(row);
+        }
+     }
+    }
+     
+     
    
             
     
@@ -49,10 +79,16 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablemandel = new javax.swing.JTable();
         btback = new javax.swing.JButton();
+        btupdate = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btdeldelivery.setText("Delete Delivery man");
+        btdeldelivery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btdeldeliveryActionPerformed(evt);
+            }
+        });
         add(btdeldelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 226, -1, -1));
 
         btcreatedel.setText("Create Deliverymen");
@@ -98,10 +134,28 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
             }
         });
         add(btback, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 226, -1, -1));
+
+        btupdate.setText("Update Deliverymen");
+        btupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btupdateActionPerformed(evt);
+            }
+        });
+        add(btupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed
-        // TODO add your handling code here:
+         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        
+        Component[] component = this.userProcessContainer.getComponents();
+        for(Component comp : component){
+            if(comp instanceof SystemAdminWorkAreaJPanel){
+                SystemAdminWorkAreaJPanel systemAdminWorkAreaJPanel= (SystemAdminWorkAreaJPanel) comp;
+               systemAdminWorkAreaJPanel.populateTree(); 
+            }
+        } 
     }//GEN-LAST:event_btbackActionPerformed
 
     private void btcreatedelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcreatedelActionPerformed
@@ -111,11 +165,57 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btcreatedelActionPerformed
 
+    private void btdeldeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdeldeliveryActionPerformed
+        int selectedRow = tablemandel.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
+        }
+        else{
+            UserAccount ua = (UserAccount)tablemandel.getValueAt(selectedRow, 1);
+            List<Organization> delivery = system.getDeliveryManDirectory().searchOrganization("Delivery");
+            for(Organization o : delivery)
+            {
+                UserAccountDirectory deliveryDirectory = o.getUserAccountDirectory();
+                List<UserAccount> l = new ArrayList(deliveryDirectory.getUserAccountList());
+                for(UserAccount u : l)
+                {
+                    if(u.getEmployee().getName().equals(ua.getEmployee().getName()))
+                    {
+                        deliveryDirectory.deleteUserAccount(u);
+                    }
+                }
+            }
+         //   cusorganization.getUserAccountDirectory().deleteUserAccount(ua);
+         //   cusorganization.getEmployeeDirectory().deleteEmployee(ua.getEmployee());
+        JOptionPane.showMessageDialog(null, "User Account deleted successfully");
+        populatetable();
+    }
+    }//GEN-LAST:event_btdeldeliveryActionPerformed
+
+    private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
+        int row = tablemandel.getSelectedRow();
+                if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Row not selected");
+            return;
+        }
+        else{
+        List<Organization> organizationdel =system.getDeliveryManDirectory().searchOrganization("Delivery") ;
+       UserAccount ua = (UserAccount)tablemandel.getValueAt(row, 1);
+            Employee emp =  ua.getEmployee();
+            ViewDeliverymanPanel viewdelpanel = new ViewDeliverymanPanel(userProcessContainer, system, delorganizat, ua, emp);
+            userProcessContainer.add("ViewDeliverPanel", viewdelpanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+    }
+    }//GEN-LAST:event_btupdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btback;
     private javax.swing.JButton btcreatedel;
     private javax.swing.JButton btdeldelivery;
+    private javax.swing.JButton btupdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablemandel;
     private javax.swing.JLabel titlemandel;

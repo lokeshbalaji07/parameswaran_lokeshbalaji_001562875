@@ -43,8 +43,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 //        {
 //            this.cusorganization=cusorg;
 //        }
-        
-        populateTree();
+//        
+//        populateTree();
     }
     
     public void populateTree(){

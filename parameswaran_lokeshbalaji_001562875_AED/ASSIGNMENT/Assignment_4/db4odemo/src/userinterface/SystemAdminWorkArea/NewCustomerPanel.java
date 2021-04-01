@@ -9,6 +9,9 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
 import Business.Role.CustomerRole;
+import Business.Role.DeliverManRole;
+import java.awt.CardLayout;
+import java.awt.Component;
 import javafx.scene.paint.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,6 +49,8 @@ public class NewCustomerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btback = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         lbtitlec = new javax.swing.JLabel();
         lbname = new javax.swing.JLabel();
         lbusername = new javax.swing.JLabel();
@@ -53,10 +58,20 @@ public class NewCustomerPanel extends javax.swing.JPanel {
         txtcusname = new javax.swing.JTextField();
         txtcususername = new javax.swing.JTextField();
         txtcuspassword = new javax.swing.JTextField();
-        btback = new javax.swing.JButton();
         btsave = new javax.swing.JButton();
         emaillb = new javax.swing.JLabel();
         txtcusemailid = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        btback.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btback.setText("Back");
+        btback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("jLabel1");
 
         lbtitlec.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbtitlec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -77,9 +92,6 @@ public class NewCustomerPanel extends javax.swing.JPanel {
             }
         });
 
-        btback.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btback.setText("Back");
-
         btsave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btsave.setText("Save");
         btsave.addActionListener(new java.awt.event.ActionListener() {
@@ -91,19 +103,26 @@ public class NewCustomerPanel extends javax.swing.JPanel {
         emaillb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         emaillb.setText("Email ID:");
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lbtitlec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
+                .addGap(202, 202, 202)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btback)
                     .addComponent(lbusername)
                     .addComponent(lbname)
                     .addComponent(lbpassword)
-                    .addComponent(emaillb))
+                    .addComponent(emaillb)
+                    .addComponent(jButton1))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -112,7 +131,7 @@ public class NewCustomerPanel extends javax.swing.JPanel {
                         .addComponent(txtcuspassword)
                         .addComponent(txtcusemailid, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                     .addComponent(btsave, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +156,9 @@ public class NewCustomerPanel extends javax.swing.JPanel {
                     .addComponent(txtcusemailid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btback)
-                    .addComponent(btsave))
-                .addContainerGap(113, Short.MAX_VALUE))
+                    .addComponent(btsave)
+                    .addComponent(jButton1))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,17 +171,52 @@ public class NewCustomerPanel extends javax.swing.JPanel {
         String customerusername = txtcususername.getText();
         String customerpassword = txtcuspassword.getText();
         String customeremailid = txtcusemailid.getText();
+        
         Employee emp = system.getEmployeeDirectory().createEmployee(customername);
         system.getUserAccountDirectory().createUserAccount(customerusername, customerpassword, emp, new CustomerRole());
+        Business.Customer.Customer customer = (Business.Customer.Customer) system.getCustomerDirectory().createOrganization(Organization.Type.Customer);
+        customer.setName("Customer");
+        Business.Role.CustomerRole customerrole = new CustomerRole();
+        customer.getUserAccountDirectory().createUserAccount(customername, customerpassword, emp, customerrole);
         JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
+        
+       
        
     }//GEN-LAST:event_btsaveActionPerformed
+
+    private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        userProcessContainer.remove(this);
+        layout.previous(userProcessContainer);
+        Component[] comps = this.userProcessContainer.getComponents();
+        for(Component comp : comps){
+            if(comp instanceof ManageCustomerPanel){
+                ManageCustomerPanel manageCustomersJPanel= (ManageCustomerPanel) comp;
+               manageCustomersJPanel.populatetable(); 
+            }
+        }
+    }//GEN-LAST:event_btbackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        userProcessContainer.remove(this);
+        layout.previous(userProcessContainer);
+        Component[] comps = this.userProcessContainer.getComponents();
+        for(Component comp : comps){
+            if(comp instanceof ManageCustomerPanel){
+                ManageCustomerPanel manageCustomersJPanel= (ManageCustomerPanel) comp;
+               manageCustomersJPanel.populatetable(); 
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btback;
     private javax.swing.JButton btsave;
     private javax.swing.JLabel emaillb;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbname;
     private javax.swing.JLabel lbpassword;
     private javax.swing.JLabel lbtitlec;

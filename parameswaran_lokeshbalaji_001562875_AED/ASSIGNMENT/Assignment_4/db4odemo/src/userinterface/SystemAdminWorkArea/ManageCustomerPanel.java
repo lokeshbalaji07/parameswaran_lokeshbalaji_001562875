@@ -5,11 +5,19 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Organization;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,7 +38,28 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.system = system;
         this.cusorganization = cusorganization;
+        populatetable();
     }
+    
+    public void populatetable(){
+        
+        DefaultTableModel tablemodel = (DefaultTableModel) managecustable.getModel();
+        tablemodel.setRowCount(0);
+       if(system.getDeliveryManDirectory().searchOrganization("Customer") ==null){
+            return;
+        }
+     List<Organization> organizationcus =system.getCustomerDirectory().searchOrganization("Customer") ;
+        for(Organization o : organizationcus )
+        {
+        for(UserAccount ua:o.getUserAccountDirectory().getUserAccountList()) {
+            Object row[] = new Object[3];
+            row[0] = ua.getEmployee().getName();
+            row[1] = ua;
+            tablemodel.addRow(row);
+        }
+        }
+    }
+   
     
  
 
@@ -84,6 +113,11 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         });
 
         delcusbt.setText("Delete Customer");
+        delcusbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delcusbtActionPerformed(evt);
+            }
+        });
 
         createcusbt.setText("Create Customer");
         createcusbt.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +127,11 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         });
 
         updatecusbt.setText("Update Customer");
+        updatecusbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatecusbtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,7 +191,60 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         } 
     }//GEN-LAST:event_backbtActionPerformed
 
+    private void delcusbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delcusbtActionPerformed
+        int selectedRow = managecustable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
+            return;
+        }
+        else{
+            UserAccount ua = (UserAccount)managecustable.getValueAt(selectedRow, 1);
+            List<Organization> customer = system.getCustomerDirectory().searchOrganization("Customer");
+            for(Organization o : customer)
+            {
+                UserAccountDirectory customerDirectory = o.getUserAccountDirectory();
+                List<UserAccount> l = new ArrayList(customerDirectory.getUserAccountList());
+                for(UserAccount u : l)
+                {
+                    if(u.getEmployee().getName().equals(ua.getEmployee().getName()))
+                    {
+                        customerDirectory.deleteUserAccount(u);
+                    }
+                }
+            }
+         //   cusorganization.getUserAccountDirectory().deleteUserAccount(ua);
+         //   cusorganization.getEmployeeDirectory().deleteEmployee(ua.getEmployee());
+        JOptionPane.showMessageDialog(null, "User Account deleted successfully");
+        populatetable();
+    }
+    }//GEN-LAST:event_delcusbtActionPerformed
 
+    private void updatecusbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecusbtActionPerformed
+//        ViewCustomerPanel viewcus = new ViewCustomerPanel(userProcessContainer, system, cusorganization);
+//        userProcessContainer.add("NewCustomerPanel", viewcus);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        layout.next(userProcessContainer);
+   int row = managecustable.getSelectedRow();
+                if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Row not selected");
+            return;
+        }
+        else{
+        List<Organization> organizationcus =system.getCustomerDirectory().searchOrganization("Customer") ;
+       UserAccount ua = (UserAccount)managecustable.getValueAt(row, 1);
+            Employee emp =  ua.getEmployee();
+            ViewCustomerPanel panel = new ViewCustomerPanel(userProcessContainer, system, cusorganization, ua, emp);
+            userProcessContainer.add("ViewNewCustomerJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+    }
+
+
+
+    }//GEN-LAST:event_updatecusbtActionPerformed
+
+   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backbt;
     private javax.swing.JButton createcusbt;

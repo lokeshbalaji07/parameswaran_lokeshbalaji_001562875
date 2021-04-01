@@ -7,6 +7,7 @@ package Business.DeliveryMan;
 
 import Business.Organization;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,13 +38,14 @@ public class DeliveryManDirectory {
         delorganizationList.remove(deliveryMan); 
     }
 
-        public Organization searchOrganization(String organizationName){
+        public List<Organization> searchOrganization(String organizationName){
+            List<Organization> list = new ArrayList();
         for (Organization organization: delorganizationList) {
             if (organization.getName().equals(organizationName)) {
-                return organization;
+                list.add(organization);
             }
         }
-        return null;
+        return list;
     }
 }
 

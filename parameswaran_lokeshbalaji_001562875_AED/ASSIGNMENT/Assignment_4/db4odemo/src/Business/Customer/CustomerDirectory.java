@@ -7,6 +7,7 @@ package Business.Customer;
 
 import Business.Organization;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,13 +39,14 @@ public class CustomerDirectory {
         organizationList.remove(customer); 
     }
     
-        public Organization searchOrganization(String organizationName){
+        public List<Organization> searchOrganization(String organizationName){
+            List<Organization> list = new ArrayList();
         for (Organization organization: organizationList) {
             if (organization.getName().equals(organizationName)) {
-                return organization;
+                list.add(organization);
             }
         }
-        return null;
+        return list;
     }
 }
 

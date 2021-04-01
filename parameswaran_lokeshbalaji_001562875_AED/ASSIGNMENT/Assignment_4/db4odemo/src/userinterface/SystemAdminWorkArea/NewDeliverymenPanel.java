@@ -5,11 +5,14 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
 import Business.Role.CustomerRole;
 import Business.Role.DeliverManRole;
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -79,6 +82,11 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
         lbphoneno.setText("Phone no:");
 
         btback.setText("Back");
+        btback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbackActionPerformed(evt);
+            }
+        });
 
         btsave.setText("Save");
         btsave.addActionListener(new java.awt.event.ActionListener() {
@@ -154,8 +162,27 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
         String deliverymanphoneno = txtdelphoneno.getText();
         Employee emp = system.getEmployeeDirectory().createEmployee(deliverymanname);
         system.getUserAccountDirectory().createUserAccount(deliverymanusername, deliverymanpassword, emp, new DeliverManRole());
+         Business.DeliveryMan.DeliveryMan deliveryMan = (Business.DeliveryMan.DeliveryMan) system.getDeliveryManDirectory().createOrganization(Organization.Type.DeliveryMan);
+         deliveryMan.setName("Delivery");
+         Business.Role.DeliverManRole deliveryManRole = new DeliverManRole();
+         deliveryMan.getUserAccountDirectory().createUserAccount(deliverymanname, deliverymanpassword, emp,deliveryManRole);
+         
+        
         JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
     }//GEN-LAST:event_btsaveActionPerformed
+
+    private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed
+       CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        userProcessContainer.remove(this);
+        layout.previous(userProcessContainer);
+        Component[] comps = this.userProcessContainer.getComponents();
+        for(Component comp : comps){
+            if(comp instanceof ManageDeliverymenpanel){
+                ManageDeliverymenpanel manageDeliveryJPanel= (ManageDeliverymenpanel) comp;
+               manageDeliveryJPanel.populatetable(); 
+            }
+        }
+    }//GEN-LAST:event_btbackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

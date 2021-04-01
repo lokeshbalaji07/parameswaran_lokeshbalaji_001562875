@@ -38,8 +38,18 @@ public class EcoSystem extends Organization{
         return business;
     }
 
+     private EcoSystem()
+     {
+         super(null);
+         deliveryManDirectory = new DeliveryManDirectory();
+         customerDirectory = new CustomerDirectory();
+     }
     public CustomerDirectory getCustomerDirectory() {
         return customerDirectory;
+    }
+
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
     }
     
     @Override
@@ -48,10 +58,7 @@ public class EcoSystem extends Organization{
         roleList.add(new SystemAdminRole());
         return roleList;
     }
-    private EcoSystem(){
-        super(null);
-       // networkList=new ArrayList<Network>();
-    }
+    
 
     
     public boolean checkIfUserIsUnique(String userName){
