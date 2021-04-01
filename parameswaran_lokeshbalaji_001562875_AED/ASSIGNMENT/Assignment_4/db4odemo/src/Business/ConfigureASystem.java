@@ -1,6 +1,7 @@
 package Business;
 
 import Business.Employee.Employee;
+import Business.Restaurant.Restaurant;
 import Business.Role.AdminRole;
 import Business.Role.CustomerRole;
 import Business.Role.DeliverManRole;
@@ -30,6 +31,7 @@ public class ConfigureASystem {
         UserAccount uam = system.getUserAccountDirectory().createUserAccount("sysman", "sysman", employee, new AdminRole());
         UserAccount uac = system.getUserAccountDirectory().createUserAccount("syscus", "syscus", employee, new CustomerRole());
         UserAccount uad = system.getUserAccountDirectory().createUserAccount("sysdel", "sysdel", employee, new DeliverManRole());
+        Restaurant restaurant = system.getRestaurantDirectory().createRestaurant("test", "sysres", "Non veg", "Manager");
 
         
         

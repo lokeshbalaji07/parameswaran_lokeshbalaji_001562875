@@ -3,7 +3,11 @@
 package userinterface.RestaurantAdminRole;
 
 
+import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+//import static java.time.Clock.system;
 import javax.swing.JPanel;
 
 /**
@@ -13,14 +17,34 @@ import javax.swing.JPanel;
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
-    
-    /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer) {
+    EcoSystem system;
+    String restaurantName;
+
+    public AdminWorkAreaJPanel(JPanel userProcessContainer,  UserAccount ua, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.system = system;
+         System.out.println("UA  "+ ua.getUsername());
+        restaurantName = findRestaurantName(ua.getUsername());
+        valueLabel.setText(restaurantName);
+    }
+        
+
+    public String findRestaurantName(String name){
+        for(Restaurant restaurant : system.getRestaurantDirectory().getRestaurantList()){
+            if(name.equals(restaurant.getManager())){
+                return restaurant.getName();
+            }
+        }
+        return "NOT FOUND";
+            
+    }
+    
+    /** Creates new form AdminWorkAreaJPanel */
+   
       
         //valueLabel.setText();
-    }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -81,11 +105,17 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_userJButtonActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
-
+     Addmenupanel addMenuJPanel = new Addmenupanel(userProcessContainer, system, restaurantName);
+        userProcessContainer.add("AddMenu", addMenuJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-
+        ManageOrderpanel manageOrderJPanel = new ManageOrderpanel(userProcessContainer, system, restaurantName);
+        userProcessContainer.add("ManagerOrder", manageOrderJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
     
     

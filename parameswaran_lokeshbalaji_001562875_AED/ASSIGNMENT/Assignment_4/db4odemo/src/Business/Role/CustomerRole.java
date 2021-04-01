@@ -18,8 +18,8 @@ import javax.swing.JPanel;
 public class CustomerRole extends Role{
 
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new CustomerAreaJPanel(userProcessContainer, account);
+   public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
+        return new CustomerAreaJPanel(userProcessContainer, account, business);
     }
     
     

@@ -8,6 +8,7 @@ package Business;
 
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
@@ -23,12 +24,14 @@ public class EcoSystem extends Organization{
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
     private DeliveryManDirectory deliveryManDirectory;
+    private OrderDirectory orderDirectory;
 
-    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory) {
+    public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory, OrderDirectory orderDirectory) {
 
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.deliveryManDirectory = deliveryManDirectory;
+        this.orderDirectory = orderDirectory;
     }
     
     public static EcoSystem getInstance(){
@@ -38,11 +41,21 @@ public class EcoSystem extends Organization{
         return business;
     }
 
+    public OrderDirectory getOrderDirectory() {
+        return orderDirectory;
+    }
+
+    public void setOrderDirectory(OrderDirectory orderDirectory) {
+        this.orderDirectory = orderDirectory;
+    }
+
      private EcoSystem()
      {
          super(null);
          deliveryManDirectory = new DeliveryManDirectory();
          customerDirectory = new CustomerDirectory();
+         restaurantDirectory = new RestaurantDirectory();
+         orderDirectory = new OrderDirectory();
      }
     public CustomerDirectory getCustomerDirectory() {
         return customerDirectory;
@@ -50,6 +63,14 @@ public class EcoSystem extends Organization{
 
     public DeliveryManDirectory getDeliveryManDirectory() {
         return deliveryManDirectory;
+    }
+
+    public RestaurantDirectory getRestaurantDirectory() {
+        return restaurantDirectory;
+    }
+
+    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
+        this.restaurantDirectory = restaurantDirectory;
     }
     
     @Override
