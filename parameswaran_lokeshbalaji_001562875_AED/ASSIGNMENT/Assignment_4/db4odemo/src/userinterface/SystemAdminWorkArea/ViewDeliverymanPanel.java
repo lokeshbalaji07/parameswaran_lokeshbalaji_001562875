@@ -5,6 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
@@ -26,22 +27,24 @@ public class ViewDeliverymanPanel extends javax.swing.JPanel {
      
 private JPanel userProcessContainer;
     private EcoSystem system;
-    private Organization custorganization;
-    private UserAccount useraccd;
-    private Employee employeed;
-    public ViewDeliverymanPanel(JPanel userProcessContainer, EcoSystem system, Organization custorganization, UserAccount useraccd, Employee employeed) {
+    private Organization organization;
+    private DeliveryMan deliveryMan;
+
+    public ViewDeliverymanPanel(JPanel userProcessContainer, EcoSystem system, Organization organization, DeliveryMan deliverymen ) {
+        initComponents();
         this.userProcessContainer = userProcessContainer;
         this.system = system;
-        this.custorganization = custorganization;
-        this.useraccd = useraccd;
-        this.employeed = employeed;
-          initComponents();
-        delvnametxt.setText(employeed.getName());
-        delvusernametxt.setText(useraccd.getUsername());
-        delvpasswordtxt.setText(useraccd.getPassword());
+        this.organization = organization;
+        this.deliveryMan = deliverymen;
+        delvnametxt.setText(deliveryMan.getDeliveryManName());
+        delvusernametxt.setText(deliveryMan.getDeliveryusername());
         //initComponents();
-        //cusvemailtxt.setText(useracc.get);
+        //d.setText(deliveryMan.getDeliAdd(
     }
+            
+    
+    
+    
 
     
 
@@ -141,28 +144,23 @@ private JPanel userProcessContainer;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-           String name = delvnametxt.getText();
-         String username = delvusernametxt.getText();
-         String password = delvpasswordtxt.getText();
-         //String emailid = cusvemailtxt.getText();
-      List<Organization> organizationdel =system.getDeliveryManDirectory().searchOrganization("Delivery") ;
-      for(Organization org : organizationdel){
-        for(UserAccount u:org.getUserAccountDirectory().getUserAccountList()) {
-                u.setUsername(username);
-                u.setPassword(password);
-            }
-    }
+        
+        String name = delvnametxt.getText();
+        String username = delvusernametxt.getText();
+        deliveryMan.setDeliveryManName(name);
+        deliveryMan.setDeliveryusername(username);
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        userProcessContainer.remove(this);
+         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+        
         Component[] comps = this.userProcessContainer.getComponents();
         for(Component comp : comps){
-            if(comp instanceof ManageDeliverymenpanel){
-                ManageDeliverymenpanel managedeliveryPanel= (ManageDeliverymenpanel) comp;
-               managedeliveryPanel.populatetable(); 
+            if(comp instanceof SystemAdminWorkAreaJPanel){
+                SystemAdminWorkAreaJPanel systemAdminWorkAreaJPanel= (SystemAdminWorkAreaJPanel) comp;
+               systemAdminWorkAreaJPanel.populateTree(); 
             }
         }
     }//GEN-LAST:event_btbackActionPerformed

@@ -14,21 +14,42 @@ import java.util.ArrayList;
  *
  * @author harold
  */
-public class DeliveryMan extends Organization {
+public class DeliveryMan  {
     
-    public DeliveryMan() {
-        super(Organization.Type.DeliveryMan.getValue());
+   String deliveryManName;
+    String deliveryusername;
+    int rating;
+
+    public String getDeliveryManName() {
+        return deliveryManName;
     }
 
+    public void setDeliveryManName(String deliveryManName) {
+        this.deliveryManName = deliveryManName;
+    }
 
+    public String getDeliveryusername() {
+        return deliveryusername;
+    }
 
+    public void setDeliveryusername(String deliveryusername) {
+        this.deliveryusername = deliveryusername;
+    }
 
+ 
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
     
     @Override
-    public ArrayList<Role> getSupportedRole() {
-        ArrayList<Role> roles = new ArrayList();
-        roles.add(new DeliverManRole());
-        return roles;
+    public String toString() {
+        return deliveryManName;
     }
+   
+
 }

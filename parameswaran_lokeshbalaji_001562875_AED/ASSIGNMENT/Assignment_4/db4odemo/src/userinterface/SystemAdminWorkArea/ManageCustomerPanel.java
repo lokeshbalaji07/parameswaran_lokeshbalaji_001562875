@@ -45,7 +45,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         
         DefaultTableModel tablemodel = (DefaultTableModel) managecustable.getModel();
         tablemodel.setRowCount(0);
-       if(system.getDeliveryManDirectory().searchOrganization("Customer") ==null){
+       if(system.getCustomerDirectory().searchOrganization("Customer") ==null){
             return;
         }
      List<Organization> organizationcus =system.getCustomerDirectory().searchOrganization("Customer") ;

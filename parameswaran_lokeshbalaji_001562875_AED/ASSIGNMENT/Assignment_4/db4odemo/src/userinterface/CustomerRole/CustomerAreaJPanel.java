@@ -70,6 +70,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                     System.out.println(coloum+"as1");
                     menu = (Menu)defaulttablemodelcust.getValueAt(row, 0);
                     quantity = String.valueOf(defaulttablemodelcust.getValueAt(row,2));
+                    System.out.println("Quantity"+ ordermenuitemtable.getValueAt(row, 2));
 //                    map1.put(course, rating);
                    
                 }
@@ -89,6 +90,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 Object row[] = new Object[3];
                 row[0] = m;
                 row[1] = m.getItemPrice();
+                row[2] = m.getQuantity();
 
                 defaulttablemodelcust.addRow(row);
             }
@@ -427,7 +429,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         
         menucus.setItemName(menu.getItemName());
         menucus.setItemPrice(menu.getItemPrice());
-        menucus.setQuantity(menu.getQuantity());
+        menucus.setQuantity(Integer.parseInt(quantity));
        
         ml.add(menucus);
         

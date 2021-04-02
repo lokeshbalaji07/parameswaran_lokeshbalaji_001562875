@@ -5,6 +5,7 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
@@ -12,6 +13,7 @@ import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,37 +29,35 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageDeliverymenpanel
      */
-    private JPanel userProcessContainer;
+   private JPanel userProcessContainer;
     private EcoSystem system;
-    private Organization delorganizat;
+    private Organization restOrganization;
 
-    public ManageDeliverymenpanel(JPanel userProcessContainer, EcoSystem system, Organization delorganizat) {
-        initComponents();
+    public ManageDeliverymenpanel(JPanel userProcessContainer, EcoSystem system, Organization restOrganization) {
         this.userProcessContainer = userProcessContainer;
         this.system = system;
-        this.delorganizat = delorganizat;
+        this.restOrganization = restOrganization;
+        initComponents();
         populatetable();
-        
     }
+
+   
  
-     public void populatetable(){
-        
-        DefaultTableModel tablemodel1 = (DefaultTableModel) tablemandel.getModel();
-        tablemodel1.setRowCount(0);
-        if(system.getDeliveryManDirectory().searchOrganization("Delivery") ==null){
-            return;
+      public void populatetable(){
+        DefaultTableModel defaulttabledel = (DefaultTableModel) tablemandel.getModel();
+        defaulttabledel.setRowCount(0);
+        if(system.getDeliveryManDirectory().getDeliveryMan()!=null){
+            for(DeliveryMan dm : system.getDeliveryManDirectory().getDeliveryMan()){
+                Object row[] = new Object[3];
+                row[0] = dm;
+                row[1] = dm.getDeliveryusername();
+                row[2] = dm.getRating();
+
+                defaulttabledel.addRow(row);
+            }
         }
-     List<Organization> organizationdel =system.getDeliveryManDirectory().searchOrganization("Delivery") ;
-     for(Organization o : organizationdel)
-     {
-        for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
-            Object row[] = new Object[3];
-            row[0] = ua.getEmployee().getName();
-            row[1] = ua;
-            tablemodel1.addRow(row);
-        }
-     }
     }
+    
      
      
    
@@ -159,55 +159,37 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btbackActionPerformed
 
     private void btcreatedelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcreatedelActionPerformed
-         NewDeliverymenPanel createdel = new NewDeliverymenPanel(userProcessContainer, system, delorganizat);
+         NewDeliverymenPanel createdel = new NewDeliverymenPanel(userProcessContainer, system);
         userProcessContainer.add("NewCustomerPanel", createdel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        populatetable();
     }//GEN-LAST:event_btcreatedelActionPerformed
 
     private void btdeldeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdeldeliveryActionPerformed
-        int selectedRow = tablemandel.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row");
+      
+       int selectedRow = tablemandel.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        else{
-            UserAccount ua = (UserAccount)tablemandel.getValueAt(selectedRow, 1);
-            List<Organization> delivery = system.getDeliveryManDirectory().searchOrganization("Delivery");
-            for(Organization o : delivery)
-            {
-                UserAccountDirectory deliveryDirectory = o.getUserAccountDirectory();
-                List<UserAccount> l = new ArrayList(deliveryDirectory.getUserAccountList());
-                for(UserAccount u : l)
-                {
-                    if(u.getEmployee().getName().equals(ua.getEmployee().getName()))
-                    {
-                        deliveryDirectory.deleteUserAccount(u);
-                    }
-                }
-            }
-         //   cusorganization.getUserAccountDirectory().deleteUserAccount(ua);
-         //   cusorganization.getEmployeeDirectory().deleteEmployee(ua.getEmployee());
-        JOptionPane.showMessageDialog(null, "User Account deleted successfully");
+        DeliveryMan dm = (DeliveryMan)tablemandel.getValueAt(selectedRow,0);
+        system.getDeliveryManDirectory().deleteDeliveryMan(dm);
         populatetable();
-    }
     }//GEN-LAST:event_btdeldeliveryActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
-        int row = tablemandel.getSelectedRow();
-                if (row < 0) {
-            JOptionPane.showMessageDialog(null, "Row not selected");
+        int selectedRow = tablemandel.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        else{
-        List<Organization> organizationdel =system.getDeliveryManDirectory().searchOrganization("Delivery") ;
-       UserAccount ua = (UserAccount)tablemandel.getValueAt(row, 1);
-            Employee emp =  ua.getEmployee();
-            ViewDeliverymanPanel viewdelpanel = new ViewDeliverymanPanel(userProcessContainer, system, delorganizat, ua, emp);
-            userProcessContainer.add("ViewDeliverPanel", viewdelpanel);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-    }
+        DeliveryMan dm = (DeliveryMan)tablemandel.getValueAt(selectedRow,0);
+       
+        ViewDeliverymanPanel updateDeliveryJPanel = new ViewDeliverymanPanel(userProcessContainer, system, restOrganization, dm);
+        userProcessContainer.add("CreateCustomer", updateDeliveryJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btupdateActionPerformed
 
 

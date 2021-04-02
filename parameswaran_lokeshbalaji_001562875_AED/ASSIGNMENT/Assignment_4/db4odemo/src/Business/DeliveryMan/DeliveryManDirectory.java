@@ -15,37 +15,43 @@ import java.util.List;
  */
 public class DeliveryManDirectory {
     
+    ArrayList<DeliveryMan> deliveryMan;
+
+   public DeliveryManDirectory(){
+        this.deliveryMan = new ArrayList();
+    }
+
+    public ArrayList<DeliveryMan> getDeliveryMan() {
+        return deliveryMan;
+    }
+
+    public void setDeliveryMan(ArrayList<DeliveryMan> deliveryMan) {
+        this.deliveryMan = deliveryMan;
+    }
     
-    
-      private ArrayList<Organization> delorganizationList;
-
-    public DeliveryManDirectory() {
-        delorganizationList = new ArrayList();
-    }
-
-    public ArrayList<Organization> getOrganizationList() {
-        return delorganizationList;
-    }
-    public Organization createOrganization(Organization.Type type){
-        Organization organization = null;
-        if (type.getValue().equals(Organization.Type.DeliveryMan.getValue())){
-            organization = new DeliveryMan();
-            delorganizationList.add(organization);
-        }
-        return organization;
-    }
-       public void deleteDeliveryMan(DeliveryMan deliveryMan){
-        delorganizationList.remove(deliveryMan); 
-    }
-
-        public List<Organization> searchOrganization(String organizationName){
-            List<Organization> list = new ArrayList();
-        for (Organization organization: delorganizationList) {
-            if (organization.getName().equals(organizationName)) {
-                list.add(organization);
-            }
-        }
-        return list;
-    }
+       public DeliveryMan createDeliveryMan(String name, String username){
+       
+       DeliveryMan dm = new DeliveryMan();
+       dm.setDeliveryManName(name);
+       dm.setDeliveryusername(username);
+       deliveryMan.add(dm);
+       
+       return dm;      
+       
+   }
+   
+   public DeliveryMan findDeliveryMan(String name){
+       for(DeliveryMan dm :deliveryMan ){
+           
+           if(dm.getDeliveryManName().equals(name)){
+               return dm;
+           }
+       }
+       return null;
+   }
+    public void deleteDeliveryMan(DeliveryMan deliveryman){
+       deliveryMan.remove(deliveryman);
+   }
+   
 }
 

@@ -9,8 +9,10 @@ import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Organization;
+import Business.Restaurant.Restaurant;
 import Business.Role.CustomerRole;
 import Business.Role.DeliverManRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -25,16 +27,22 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
     /**
      * Creates new form NewDeliverymenPanel
      */
-        private JPanel userProcessContainer;
+       private JPanel userProcessContainer;
     private EcoSystem system;
-    private Organization delorganization;
+    private Organization organization;
+    private Restaurant restaurant;
+      String name;
+      String username;
+         String address;
+         String type ;
 
-    public NewDeliverymenPanel(JPanel userProcessContainer, EcoSystem system, Organization delorganization) {
-        initComponents();
+    public NewDeliverymenPanel(JPanel userProcessContainer, EcoSystem system) {
+       initComponents();
         this.userProcessContainer = userProcessContainer;
         this.system = system;
-        this.delorganization = delorganization;
     }
+         
+
     
     
 
@@ -156,30 +164,29 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtdelnameActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-        String deliverymanname = txtdelname.getText();
-        String deliverymanusername = txtdelusername.getText();
-        String deliverymanpassword = txtdelpassword.getText();
-        String deliverymanphoneno = txtdelphoneno.getText();
-        Employee emp = system.getEmployeeDirectory().createEmployee(deliverymanname);
-        system.getUserAccountDirectory().createUserAccount(deliverymanusername, deliverymanpassword, emp, new DeliverManRole());
-         Business.DeliveryMan.DeliveryMan deliveryMan = (Business.DeliveryMan.DeliveryMan) system.getDeliveryManDirectory().createOrganization(Organization.Type.DeliveryMan);
-         deliveryMan.setName("Delivery");
-         Business.Role.DeliverManRole deliveryManRole = new DeliverManRole();
-         deliveryMan.getUserAccountDirectory().createUserAccount(deliverymanname, deliverymanpassword, emp,deliveryManRole);
+        String name = txtdelname.getText();
+        //String add = dName.getText();
+        String username = txtdelusername.getText();
+        String password = txtdelpassword.getText();
+        
+        Employee emp = system.getEmployeeDirectory().createEmployee(name);
+        UserAccount account = system.getUserAccountDirectory().createUserAccount(username, password, emp, new DeliverManRole());
+        system.getDeliveryManDirectory().createDeliveryMan(name,username);
          
         
         JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed
-       CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        userProcessContainer.remove(this);
+      userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+        
         Component[] comps = this.userProcessContainer.getComponents();
         for(Component comp : comps){
-            if(comp instanceof ManageDeliverymenpanel){
-                ManageDeliverymenpanel manageDeliveryJPanel= (ManageDeliverymenpanel) comp;
-               manageDeliveryJPanel.populatetable(); 
+            if(comp instanceof SystemAdminWorkAreaJPanel){
+                SystemAdminWorkAreaJPanel systemAdminWorkAreaJPanel= (SystemAdminWorkAreaJPanel) comp;
+               systemAdminWorkAreaJPanel.populateTree(); 
             }
         }
     }//GEN-LAST:event_btbackActionPerformed
