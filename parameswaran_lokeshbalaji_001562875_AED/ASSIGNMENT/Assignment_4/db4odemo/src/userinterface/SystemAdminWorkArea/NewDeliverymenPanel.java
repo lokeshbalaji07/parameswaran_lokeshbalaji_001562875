@@ -67,6 +67,8 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
         btback = new javax.swing.JButton();
         btsave = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(240, 147, 38));
+
         lbtitlenewdel.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbtitlenewdel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbtitlenewdel.setText("Create New Delivery Man");
@@ -89,14 +91,18 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
         lbphoneno.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lbphoneno.setText("Phone no:");
 
+        btback.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btback.setText("Back");
+        btback.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbackActionPerformed(evt);
             }
         });
 
+        btsave.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btsave.setText("Save");
+        btsave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btsaveActionPerformed(evt);
@@ -118,7 +124,8 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
                     .addComponent(txtdelphoneno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btsave))
                 .addContainerGap(170, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(166, 166, 166)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbname)
                     .addComponent(lbusername)
@@ -128,7 +135,7 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
                     .addComponent(txtdelname, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtdelusername, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtdelpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(171, 171, 171))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +162,7 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btback)
                     .addComponent(btsave))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,13 +175,17 @@ public class NewDeliverymenPanel extends javax.swing.JPanel {
         //String add = dName.getText();
         String username = txtdelusername.getText();
         String password = txtdelpassword.getText();
+        if(name.isEmpty() || username.isEmpty() || password.isEmpty()){
+           JOptionPane.showMessageDialog(null,"All the fields are required", "Success", JOptionPane.ERROR_MESSAGE);
+           return;
+        }
         
         Employee emp = system.getEmployeeDirectory().createEmployee(name);
         UserAccount account = system.getUserAccountDirectory().createUserAccount(username, password, emp, new DeliverManRole());
         system.getDeliveryManDirectory().createDeliveryMan(name,username);
          
         
-        JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
+        JOptionPane.showMessageDialog(null, "Delivery Man Saved Successfully");
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed

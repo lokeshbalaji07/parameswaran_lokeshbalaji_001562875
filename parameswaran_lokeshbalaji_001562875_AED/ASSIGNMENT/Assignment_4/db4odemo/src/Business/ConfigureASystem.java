@@ -31,7 +31,7 @@ public class ConfigureASystem {
         UserAccount uam = system.getUserAccountDirectory().createUserAccount("sysman", "sysman", employee, new AdminRole());
         UserAccount uac = system.getUserAccountDirectory().createUserAccount("syscus", "syscus", employee, new CustomerRole());
         UserAccount uad = system.getUserAccountDirectory().createUserAccount("sysdel", "sysdel", employee, new DeliverManRole());
-        Restaurant restaurant = system.getRestaurantDirectory().createRestaurant("test", "sysres", "Non veg", "Manager");
+        //Restaurant restaurant = system.getRestaurantDirectory().createRestaurant("test", "sysres", "Non veg", "Manager");
 
         
         

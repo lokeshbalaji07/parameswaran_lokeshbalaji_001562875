@@ -24,6 +24,24 @@ public class Order {
     Restaurant restaurant;
     MenuDirectory menuDirectory;
     DeliveryMan deliveryMan;
+    Double amount;
+    String comments;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
     private static int count = 1;
 
     public int getOrderID() {

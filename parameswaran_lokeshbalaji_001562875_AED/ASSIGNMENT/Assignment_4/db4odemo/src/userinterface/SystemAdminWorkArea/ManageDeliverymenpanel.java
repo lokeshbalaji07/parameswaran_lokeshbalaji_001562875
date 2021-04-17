@@ -81,9 +81,12 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         btback = new javax.swing.JButton();
         btupdate = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(240, 147, 38));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btdeldelivery.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btdeldelivery.setText("Delete Delivery man");
+        btdeldelivery.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btdeldelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btdeldeliveryActionPerformed(evt);
@@ -91,7 +94,9 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         });
         add(btdeldelivery, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 226, -1, -1));
 
+        btcreatedel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btcreatedel.setText("Create Deliverymen");
+        btcreatedel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btcreatedel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btcreatedelActionPerformed(evt);
@@ -127,7 +132,9 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 102, -1, 95));
 
+        btback.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btback.setText("Back");
+        btback.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbackActionPerformed(evt);
@@ -135,7 +142,9 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         });
         add(btback, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 226, -1, -1));
 
+        btupdate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btupdate.setText("Update Deliverymen");
+        btupdate.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btupdateActionPerformed(evt);
@@ -176,6 +185,7 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         DeliveryMan dm = (DeliveryMan)tablemandel.getValueAt(selectedRow,0);
         system.getDeliveryManDirectory().deleteDeliveryMan(dm);
         populatetable();
+        JOptionPane.showMessageDialog(null, "Delivery man account deleted Successfully");
     }//GEN-LAST:event_btdeldeliveryActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
@@ -190,6 +200,7 @@ public class ManageDeliverymenpanel extends javax.swing.JPanel {
         userProcessContainer.add("CreateCustomer", updateDeliveryJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+         JOptionPane.showMessageDialog(null, "Customer Saved Successfully");
     }//GEN-LAST:event_btupdateActionPerformed
 
 

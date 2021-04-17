@@ -13,6 +13,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -67,6 +68,8 @@ private JPanel userProcessContainer;
         btsave = new javax.swing.JButton();
         btback = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(240, 147, 38));
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View DeliveryMan");
@@ -80,14 +83,18 @@ private JPanel userProcessContainer;
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("Password:");
 
-        btsave.setText("Save");
+        btsave.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btsave.setText("Update");
+        btsave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btsaveActionPerformed(evt);
             }
         });
 
+        btback.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btback.setText("Back");
+        btback.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbackActionPerformed(evt);
@@ -139,7 +146,7 @@ private JPanel userProcessContainer;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsave)
                     .addComponent(btback))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,6 +156,7 @@ private JPanel userProcessContainer;
         String username = delvusernametxt.getText();
         deliveryMan.setDeliveryManName(name);
         deliveryMan.setDeliveryusername(username);
+        JOptionPane.showMessageDialog(null, "Delivery man Updated Successfully");
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void btbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbackActionPerformed

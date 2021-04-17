@@ -55,6 +55,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
             Object row[] = new Object[3];
             row[0] = ua.getEmployee().getName();
             row[1] = ua;
+            //row[2] = ua.getEmployee().ge
             tablemodel.addRow(row);
         }
         }
@@ -79,6 +80,9 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         delcusbt = new javax.swing.JButton();
         createcusbt = new javax.swing.JButton();
         updatecusbt = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        setBackground(new java.awt.Color(240, 137, 38));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,78 +90,83 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
 
         managecustable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Name", "Username", "Email ID"
+                "Name", "Username"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(managecustable);
 
+        backbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         backbt.setText("Back");
+        backbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         backbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtActionPerformed(evt);
             }
         });
 
+        delcusbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         delcusbt.setText("Delete Customer");
+        delcusbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         delcusbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delcusbtActionPerformed(evt);
             }
         });
 
+        createcusbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         createcusbt.setText("Create Customer");
+        createcusbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         createcusbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createcusbtActionPerformed(evt);
             }
         });
 
+        updatecusbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         updatecusbt.setText("Update Customer");
+        updatecusbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updatecusbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatecusbtActionPerformed(evt);
             }
         });
 
+        jSeparator1.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backbt)
-                        .addGap(100, 100, 100)
-                        .addComponent(delcusbt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updatecusbt)
-                            .addComponent(createcusbt))))
-                .addGap(89, 89, 89))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(updatecusbt)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(backbt)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(delcusbt)
+                            .addGap(88, 88, 88)
+                            .addComponent(createcusbt))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -166,7 +175,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
                     .addComponent(createcusbt))
                 .addGap(18, 18, 18)
                 .addComponent(updatecusbt)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,6 +260,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
     private javax.swing.JButton delcusbt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable managecustable;
     private javax.swing.JButton updatecusbt;
     // End of variables declaration//GEN-END:variables

@@ -12,6 +12,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -66,6 +67,8 @@ public class ViewCustomerPanel extends javax.swing.JPanel {
         btsave = new javax.swing.JButton();
         btback = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(240, 147, 38));
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View Customer");
@@ -88,14 +91,18 @@ public class ViewCustomerPanel extends javax.swing.JPanel {
             }
         });
 
-        btsave.setText("Save");
+        btsave.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btsave.setText("Update");
+        btsave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btsaveActionPerformed(evt);
             }
         });
 
+        btback.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btback.setText("Back");
+        btback.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbackActionPerformed(evt);
@@ -116,10 +123,10 @@ public class ViewCustomerPanel extends javax.swing.JPanel {
                     .addComponent(lbcusvemailid))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(btback)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btsave))
+                        .addComponent(btsave, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cusvusernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cusvnametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,7 +159,7 @@ public class ViewCustomerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsave)
                     .addComponent(btback))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,6 +191,7 @@ public class ViewCustomerPanel extends javax.swing.JPanel {
                 u.setUsername(username);
                 u.setPassword(password);
             }
+        JOptionPane.showMessageDialog(null, "Customer Updated Successfully");
     }
     }//GEN-LAST:event_btsaveActionPerformed
 

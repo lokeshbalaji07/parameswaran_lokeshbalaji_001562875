@@ -60,7 +60,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
+        setBackground(new java.awt.Color(240, 137, 38));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -73,7 +75,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 userJButtonActionPerformed(evt);
             }
         });
-        add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 180, -1));
+        add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 180, -1));
 
         manageEmployeeJButton.setText("Manage menu");
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,10 +99,17 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+
+        jSeparator1.setOpaque(true);
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 580, 5));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
-        // TODO add your handling code here:
+        
+         Managerestaurantpanel manageRestaurantPanel = new Managerestaurantpanel(userProcessContainer, system, restaurantName);
+        userProcessContainer.add("Manage Restaurant", manageRestaurantPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
     }//GEN-LAST:event_userJButtonActionPerformed
 
@@ -122,6 +131,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;

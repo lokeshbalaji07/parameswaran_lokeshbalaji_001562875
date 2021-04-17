@@ -51,23 +51,25 @@ public class Managerestdashboard extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         btaddrest = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(240, 137, 38));
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Restaurant Management");
 
         RestManagetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Restaurant Name", "Restaurant Address", "Restaurant Type", "Manager Name"
+                "Restaurant Name", "Restaurant Address", "Manager Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -76,6 +78,7 @@ public class Managerestdashboard extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(RestManagetable);
 
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +86,9 @@ public class Managerestdashboard extends javax.swing.JPanel {
             }
         });
 
+        btaddrest.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btaddrest.setText("Add Restaurant");
+        btaddrest.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btaddrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btaddrestActionPerformed(evt);
@@ -97,10 +102,10 @@ public class Managerestdashboard extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
                         .addComponent(btaddrest))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(100, Short.MAX_VALUE))
@@ -110,13 +115,13 @@ public class Managerestdashboard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btaddrest))
-                .addGap(270, 270, 270))
+                .addGap(283, 283, 283))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -130,8 +135,8 @@ public class Managerestdashboard extends javax.swing.JPanel {
             Object row[] = new Object[5];
             row[0] = res.getName();
             row[1] = res.getAddress();
-            row[2] = res.getType();
-            row[3] = res.getManager();
+            //row[2] = res.getType();
+            row[2] = res.getManager();
             defaulrestmodel.addRow(row);
         }
     }

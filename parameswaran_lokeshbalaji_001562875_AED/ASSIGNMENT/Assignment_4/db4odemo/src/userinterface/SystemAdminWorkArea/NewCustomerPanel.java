@@ -73,6 +73,8 @@ public class NewCustomerPanel extends javax.swing.JPanel {
 
         jLabel1.setText("jLabel1");
 
+        setBackground(new java.awt.Color(240, 147, 38));
+
         lbtitlec.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lbtitlec.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbtitlec.setText("Create New Customer");
@@ -94,6 +96,7 @@ public class NewCustomerPanel extends javax.swing.JPanel {
 
         btsave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btsave.setText("Save");
+        btsave.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btsaveActionPerformed(evt);
@@ -103,7 +106,9 @@ public class NewCustomerPanel extends javax.swing.JPanel {
         emaillb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         emaillb.setText("Email ID:");
 
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("Back");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -158,7 +163,7 @@ public class NewCustomerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsave)
                     .addComponent(jButton1))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,6 +176,11 @@ public class NewCustomerPanel extends javax.swing.JPanel {
         String customerusername = txtcususername.getText();
         String customerpassword = txtcuspassword.getText();
         String customeremailid = txtcusemailid.getText();
+        
+        if(customername.isEmpty() || customerusername.isEmpty() || customerpassword.isEmpty() || customeremailid.isEmpty()){
+           JOptionPane.showMessageDialog(null,"All the fields are required", "Success", JOptionPane.ERROR_MESSAGE);
+           return;
+        }
         
         Employee emp = system.getEmployeeDirectory().createEmployee(customername);
         system.getUserAccountDirectory().createUserAccount(customerusername, customerpassword, emp, new CustomerRole());

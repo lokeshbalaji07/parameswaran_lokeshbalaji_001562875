@@ -58,7 +58,7 @@ public class ManageOrderpanel extends javax.swing.JPanel {
             Object row[] = new Object[5];
                 row[0] = orders.getOrderID();
                 row[1] = orders.getMenuDirectory().getMenu().get(0).getItemName();
-//                row[2] = order.getMenuDirectory().getMenu().get(0).getItemPrice();
+               row[2] = orders.getMenuDirectory().getMenu().get(0).getItemPrice();
                 row[3] = orders.getMenuDirectory().getMenu().get(0).getQuantity();
                 row[4] =  orders;
                 defaultordertable.addRow(row);
@@ -90,6 +90,7 @@ public class ManageOrderpanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         deliverycombobox = new javax.swing.JComboBox<>();
         btassign = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         manageordertable = new javax.swing.JTable();
@@ -97,6 +98,11 @@ public class ManageOrderpanel extends javax.swing.JPanel {
         vieworderbt = new javax.swing.JButton();
         assigndelbt = new javax.swing.JButton();
         btback = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        setBackground(new java.awt.Color(240, 137, 38));
+
+        jPanel1.setBackground(new java.awt.Color(240, 137, 38));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,12 +113,16 @@ public class ManageOrderpanel extends javax.swing.JPanel {
 
         deliverycombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Delivery Man" }));
 
+        btassign.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btassign.setText("Assign");
+        btassign.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btassign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btassignActionPerformed(evt);
             }
         });
+
+        jSeparator2.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,13 +140,16 @@ public class ManageOrderpanel extends javax.swing.JPanel {
                         .addGap(314, 314, 314)
                         .addComponent(btassign)))
                 .addContainerGap(118, Short.MAX_VALUE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(deliverycombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,73 +183,87 @@ public class ManageOrderpanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(manageordertable);
 
+        acceptordbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         acceptordbt.setText("Accept Order");
+        acceptordbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         acceptordbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acceptordbtActionPerformed(evt);
             }
         });
 
+        vieworderbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         vieworderbt.setText("View Order");
+        vieworderbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         vieworderbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vieworderbtActionPerformed(evt);
             }
         });
 
+        assigndelbt.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         assigndelbt.setText("Assign Deliverymen");
+        assigndelbt.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         assigndelbt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assigndelbtActionPerformed(evt);
             }
         });
 
+        btback.setBackground(new java.awt.Color(204, 204, 204));
+        btback.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btback.setText("Back");
+        btback.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btbackActionPerformed(evt);
             }
         });
 
+        jSeparator1.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btback)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(77, 77, 77)
                         .addComponent(acceptordbt)
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(vieworderbt)
-                        .addGap(39, 39, 39)
+                        .addGap(67, 67, 67)
                         .addComponent(assigndelbt))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(161, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btback)
                     .addComponent(acceptordbt)
                     .addComponent(vieworderbt)
-                    .addComponent(assigndelbt)
-                    .addComponent(btback))
-                .addGap(61, 61, 61)
+                    .addComponent(assigndelbt))
+                .addGap(50, 50, 50)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -295,6 +322,8 @@ public class ManageOrderpanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable manageordertable;
     private javax.swing.JButton vieworderbt;
     // End of variables declaration//GEN-END:variables
